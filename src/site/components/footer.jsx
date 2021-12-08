@@ -8,22 +8,22 @@ function Footer(){
       <div>
         <ul className="list-unstyled list-inline social text-center">
           <li className="list-inline-item">
-            <a href="#">
+            <a href="/#">
               <i className="fa fa-facebook fa-2x"></i>
             </a>
           </li>
           <li className="list-inline-item">
-            <a href="#">
+            <a href="/#">
               <i className="fa fa-twitter fa-2x"></i>
             </a>
           </li>
           <li className="list-inline-item">
-            <a href="#">
+            <a href="/#">
               <i className="fa fa-instagram fa-2x"></i>
             </a>
           </li>						
           <li className="list-inline-item">
-            <a href="#" target="_blank">
+            <a href="/#" target="_blank">
               <i className="fa fa-envelope fa-2x"></i>
             </a>
           </li>
