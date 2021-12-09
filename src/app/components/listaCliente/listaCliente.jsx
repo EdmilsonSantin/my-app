@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import './listaCliente.css';
-import clientes from '../../dados/clientes';
+import firebase from '../../config/firebase';
 
 function ListaClientes(){
+  const [clientes, setClientes] = useState([]);
+  let listaCli = [];
+
+  useEffect(function(){
+    firebase.firestore().collection('clientes').get()
+      .then(async function(resultado){
+        await resultado.docs.forEach(
+          function(doc){
+            listaCli.push(
+              {
+                id: doc.id,
+                nome: doc.data().nome,
+                email: doc.data().email,
+                telefone: doc.data().telefone
+              }
+            )
+          }
+        )
+        setClientes(listaCli);
+      })
+  }, []);
+
   return (
     <table className="table table-hover table-bordered">
       <thead className="table-secondary">
@@ -19,9 +41,9 @@ function ListaClientes(){
             return (
               <tr key={cliente.id}>
                 <th scope="row">{cliente.id}</th>
-                <td>{cliente.name}</td>
+                <td>{cliente.nome}</td>
                 <td>{cliente.email}</td>
-                <td>{cliente.phone}</td>
+                <td>{cliente.telefone}</td>
               </tr>
             )
           })
