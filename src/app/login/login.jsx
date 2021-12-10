@@ -35,16 +35,16 @@ function Login(){
         <h1 className="h3 mb-3 fw-normal">Login</h1>
         <div className="form-floating">
           <input onChange={alterarEmail} type="email" className="form-control" id="floatingInput" placeholder="email"/>
-          <label for="floatingInput">Email</label>
+          <label htmlFor="floatingInput">Email</label>
         </div>
         <div className="form-floating">
           <input onChange={alterarSenha} type="password" className="form-control" id="floatingPassword" placeholder="Senha"/>
-          <label for="floatingPassword">Senha</label>
+          <label htmlFor="floatingPassword">Senha</label>
         </div>
         <button onClick={loginUsuario} className="w-100 btn btn-lg btn-primary" type="button">Acessar</button>
         {
           sucesso === 'N' 
-            ? <div class="alert alert-danger mt-2" role="alert">Email ou senha inválidos!</div>
+            ? <div className="alert alert-danger mt-2" role="alert">Email ou senha inválidos!</div>
             : null
         }
         {

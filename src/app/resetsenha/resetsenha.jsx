@@ -29,13 +29,13 @@ function ResetSenha(){
         <h1 className="h3 mb-3 fw-normal">Recuperar Senha</h1>
         <div className="form-floating">
           <input onChange={(e) => setEmail(e.target.value)} type="email" className="form-control" id="floatingInput" placeholder="email"/>
-          <label for="floatingInput">Email</label>
+          <label htmlFor="floatingInput">Email</label>
         </div>
         <button onClick={RecuperarSenha} className="w-100 btn btn-lg btn-primary mt-3" type="button">Enviar</button>
         {
           mensagem.length > 0 
-            ? <div class="alert alert-danger mt-2" role="alert">{mensagem}</div>
-            : <div class="alert alert-success mt-2" role="alert">{sucesso}</div>
+            ? <div className="alert alert-danger mt-2" role="alert">{mensagem}</div>
+            : <div className="alert alert-success mt-2" role="alert">{sucesso}</div>
         }
         <div className="login-links mt-5">
           <Link to="/app/novaconta" className="mx-3">Criar uma conta</Link>
