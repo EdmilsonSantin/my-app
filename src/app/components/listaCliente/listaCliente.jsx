@@ -1,30 +1,12 @@
-import React, { useState, useEffect }  from 'react';
+import React  from 'react';
+import { Link } from 'react-router-dom';
 import './listaCliente.css';
-import firebase from '../../config/firebase';
 
-function ListaClientes(){
-  const [clientes, setClientes] = useState([]);
-  let listaCli = [];
-
-  useEffect(function(){
-    firebase.firestore().collection('clientes').get()
-      .then(async function(resultado){
-        await resultado.docs.forEach(
-          function(doc){
-            listaCli.push(
-              {
-                id: doc.id,
-                nome: doc.data().nome,
-                email: doc.data().email,
-                telefone: doc.data().telefone
-              }
-            )
-          }
-        )
-        setClientes(listaCli);
-      })
-  }, []);
-
+function ListaClientes(props){
+  function deleteUser(id){
+    alert('Excluir usuário ' + id);
+  }
+  
   return (
     <table className="table table-hover table-bordered">
       <thead className="table-secondary">
@@ -33,17 +15,22 @@ function ListaClientes(){
         <th scope="col">Nome</th>
         <th scope="col">Email</th>
         <th scope="col">Telefone</th>
+        <th scope="col" className="col-acao"></th>
         </tr>
       </thead>
       <tbody>
         {
-          clientes.map((cliente) => {
+          props.arrayClientes.map((cliente) => {
             return (
               <tr key={cliente.id}>
                 <th scope="row">{cliente.id}</th>
                 <td>{cliente.nome}</td>
                 <td>{cliente.email}</td>
                 <td>{cliente.telefone}</td>
+                <td>
+                  <Link to="#"><i className="fas fa-edit icone-acao"></i></Link>
+                  <Link to="#" onClick={() => deleteUser(cliente.id)}><i className="far fa-trash-alt icone-acao red"></i></Link>
+                </td>
               </tr>
             )
           })
