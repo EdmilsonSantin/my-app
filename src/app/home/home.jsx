@@ -5,11 +5,28 @@ import ListaClientes from '../components/listaCliente/listaCliente';
 import firebase from '../config/firebase';
 import 'firebase/firestore';
 import './home.css';
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 function Home(){
   const [clientes, setClientes] = useState([]);
   const [busca, setBusca] = useState('');
+  const [excluido, setExcluido] = useState('');
   const [texto, setTexto] = useState('');
+  const [confirmacao, setConfirmacao] = useState(false);
+  const [confirmacaoId, setConfirmacaoId] = useState('');
+  
+  function deleteUser(id){
+    firebase.firestore().collection('clientes').doc(id).delete()
+      .then(() => {
+        setExcluido(id);
+        setConfirmacao(false);
+      });
+  }
+
+  function confirmDeleteUser(id){
+    setConfirmacao(true);
+    setConfirmacaoId(id);
+  }
 
   useEffect(function(){
     let listaCli = [];
@@ -31,7 +48,7 @@ function Home(){
         )
         setClientes(listaCli);
       })
-  }, [busca]);
+  }, [busca, excluido]);
   
   return (
     <div className="container-fluid titulo">
@@ -49,7 +66,25 @@ function Home(){
             </div>
             </div>
           </div>
-          <ListaClientes arrayClientes={clientes} />
+          <ListaClientes arrayClientes={clientes} clickDelete={confirmDeleteUser}/>
+
+          {confirmacao ?
+            <SweetAlert
+              warning
+              showCancel
+              showCloseButton
+              confirmBtnText="Sim"            
+              confirmBtnBsStyle="danger"
+              cancelBtnText="Não"
+              cancelBtnBsStyle="light"
+              title="Exclusão"
+              onConfirm={() => {deleteUser(confirmacaoId)}}
+              onCancel={() => {setConfirmacao(false)}}
+              reverseButtons={true}
+            >
+              Deseja excluir o cliente selecionado?
+            </SweetAlert> :null
+          }
         </div>
     </div>
   )   

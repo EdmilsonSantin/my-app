@@ -35,7 +35,12 @@ function ResetSenha(){
         {
           mensagem.length > 0 
             ? <div className="alert alert-danger mt-2" role="alert">{mensagem}</div>
-            : <div className="alert alert-success mt-2" role="alert">{sucesso}</div>
+            : null
+        }
+        {
+          sucesso.length > 0 
+            ? <div className="alert alert-success mt-2" role="alert">{sucesso}</div>
+            : null
         }
         <div className="login-links mt-5">
           <Link to="/app/novaconta" className="mx-3">Criar uma conta</Link>
