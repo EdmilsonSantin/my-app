@@ -24,7 +24,7 @@ function EditarCliente(props){
       .catch((erro) => {
 
       })
-    }, [])
+    }, [props.match.params.id])
 
   function AlterarCliente(){
     if (nome.length === 0) {
